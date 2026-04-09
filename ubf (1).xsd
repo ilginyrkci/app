@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by bulent herdem (-) -->
+<!--SBBUP UBF.XSD V2.0 25.01.2010 11:19 -->
+<!--Değişiklikler:
+    <xs:enumeration value="Kosova"/>												EKLENDİ  	==> 17.03.2010 15:03
+	Tüm string element tanımlarına  restriction tanımlamaları yapıldı				EKLENDİ		==> 24.08.2010 10:15
+	<xs:enumeration value="LOJİSTİK"/>												EKLENDİ		==> 18.02.2011 13:10 
+
+	Aşağıdaki açıklama bilgisi eklendi.
+	ReferansFormNo alanında kullanılacak örnek veriler:
+		 stok ilk giriş 	: -45 
+		 SBIF/UBF/Ayniyat	: 1433
+		 Stok Dönüşüm 		: [DNSM]6
+																					EKLENDİ		==>	15.06.2011 17:45	
+																					
+	<xs:enumeration value="ATIK YÖNETİM SİSTEMİ"/>									EKLENDİ		==>	24.10.2011 11:00
+	<xs:enumeration value="YEMEK ÜRETİMİ"/>											EKLENDİ		==>	24.10.2011 11:00
+	ulkeType veritabanındaki mevcut ülkelerle güncellendi 							EKLENDİ		==>	14.02.2012 17:00
+  	ulkeType "Menemen Deri S.Bölgesi" -> "İzmir Serbest Bölgesi"						DEĞİŞTİ	==>	05.03.2012 17:00
+    serbestBolgeType "İzmir Menemen Deri Serbest Bölgesi" -> "İzmir Serbest Bölgesi"	DEĞİŞTİ ==>	05.03.2012 17:00
+	
+	ulkeType "ABD Virjin Adalarİ" ->			 "ABD Virjin Adaları"									DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "AHL Serbest Bölgesi" ->			 "İstanbul Atatürk Havalimanı Serbest Bölgesi"			DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Bouvet Adalarİ" ->				 "Bouvet Adaları"										DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Cayman Adalarİ" ->				 "Cayman Adaları"										DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Cebelitarİk"	->					 "Cebelitarık"											DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Falkland Adalarİ" ->				 "Falkland Adaları"										DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Faroe Adalarİ" ->					 "Faroe Adaları"										DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Fildiİi Kıyısı" ->				 "Fildişi Kıyısı"										DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Fransa Güney Böl" ->				 "Fransa Güney Bölgesi"									DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "G.Antep Serbest Bölgesi" ->		 "Gaziantep Serbest Bölgesi"							DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "İst.End.ve Tic. Serbest Bölgesi" ->"İstanbul Endüstri ve Ticaret Serbest Bölgesi"			DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Niue Adasİ" ->					 "Niue Adası"											DEĞİŞTİ	==>	04.06.2012 17:16	
+	ulkeType "Test Sebest Bölgesi" ->			 "Test Serbest Bölgesi"									DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Trakya Serbest Bölgesi" ->		 "İstanbul Trakya Serbest Bölgesi"						DEĞİŞTİ	==>	04.06.2012 17:16	
+	ulkeType "Tübitak Tekn.Serbest Bölgesi" ->	 "Tübitak-Marmara Araştırma Merkezi Teknoloji Serbest Bölgesi"	DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "Yumurtalık S.Bölgesi" ->			 "Adana-Yumurtalık Serbest Bölgesi"						DEĞİŞTİ	==>	04.06.2012 17:16
+	ulkeType "İngiltere" ->						 "Birleşik Krallık"										DEĞİŞTİ	==>	29.06.2016 13:45
+	
+	
+	<xs:enumeration value="KUMANYACILIK"/>																EKLENDİ		==> 17.11.2016 13:10
+	<xs:enumeration value="KIYMETLİ EŞYA LOJİSTİĞİ"/>												    EKLENDİ		==> 17.11.2016 13:10
+	<xs:enumeration value="BORSA KASA HİZMETİ"/>														EKLENDİ		==> 17.11.2016 13:10
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="UBFBilgileri">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UBFGenelBilgiler">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="BelgeNo" type="xs:string" minOccurs="0"/>	<!--Sadece export icin eklendi, import ederken bu alana bakilmaz-->
+							<xs:element name="DisReferansNo" minOccurs="0"><!--Firmaların sbup dışı sbiflerini takip edebilmeleri için eklendi-->
+							  <xs:simpleType>
+								<xs:restriction base="xs:string">
+								  <xs:minLength value="0"/>
+								  <xs:maxLength value="30"/>
+								</xs:restriction>
+							  </xs:simpleType>
+							</xs:element>
+							<xs:element name="SerbestBolgeAdi" type="serbestBolgeType"/>
+							<xs:element name="FirmaFaaliyetRuhsatiNo">
+							  <xs:simpleType>
+								<xs:restriction base="xs:string">
+								  <xs:minLength value="1"/>
+								  <xs:maxLength value="32"/>
+								</xs:restriction>
+							  </xs:simpleType>
+							</xs:element>
+							<xs:element name="FirmaFaaliyetRuhsatiKonusu" type="ruhsatKonulariType"/>
+							<xs:element name="GirisTarihi" type="CSDateType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="UrunBilgileri" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Urun">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="SiraNo" type="xs:int" minOccurs="0"/><!--Sadece export icin eklendi, import ederken bu alana bakilmaz-->
+										<xs:element name="gtip">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{12}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="UrunAdi">
+										  <xs:simpleType>
+											<xs:restriction base="xs:string">
+											  <xs:minLength value="1"/>
+											  <xs:maxLength value="50"/>
+											</xs:restriction>
+										  </xs:simpleType>
+										</xs:element>
+										<xs:element name="BirinciMiktar">
+											<xs:simpleType>
+												<xs:restriction base="xs:decimal">
+													<xs:minInclusive value="0.001"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="BirinciBirim" type="olcuBirimiType"/>
+										<xs:element name="IkinciMiktar" type="xs:decimal" minOccurs="0"/>
+										<xs:element name="IkinciBirim" type="olcuBirimiType" minOccurs="0"/>
+										<xs:element name="UcuncuMiktar" type="xs:decimal" minOccurs="0"/>
+										<xs:element name="UcuncuBirim" type="olcuBirimiType" minOccurs="0"/>
+										<xs:element name="UrunMensei" type="ulkeType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="HamMadde" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<!--referans olarak kullanılan malkalem veya Urun bilgisinin SBBUP sistemindeki tekil numarası, 
+										    eger kullanıcı tarafından biliniyorsa , verilmesi gerekmektedir-->
+										<xs:element name="ReferansFormTipi" type="formTipiType"/>
+										<!-- ReferansFormNo alanında kullanılacak örnek veriler:
+											 stok ilk giriş 	: -45 
+											 SBIF/UBF/Ayniyat	: 1433
+											 Stok Dönüşüm 		: [DNSM]6
+										-->
+										<xs:element name="ReferansFormNo">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="32"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>										
+										<xs:element name="ReferansFormYil">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{4}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>	
+										<xs:element name="ReferansSiraNo" type="xs:int"/>
+										<xs:element name="gtip">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{12}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Cins">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="30"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>										
+										<xs:element name="Mensei" type="ulkeType"/>
+										<xs:element name="BirinciMiktar">
+											<xs:simpleType>
+												<xs:restriction base="xs:decimal">
+													<xs:minInclusive value="0.001"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="BirinciFireMiktar" type="xs:decimal" minOccurs="0"/>
+										<xs:element name="BirinciBirim" type="olcuBirimiType"/>
+										<xs:element name="IkinciMiktar" type="xs:decimal" minOccurs="0"/>
+										<xs:element name="IkinciFireMiktar" type="xs:decimal"  minOccurs="0"/>
+										<xs:element name="IkinciBirim" type="olcuBirimiType"  minOccurs="0"/>
+										<xs:element name="UcuncuMiktar" type="xs:decimal"  minOccurs="0"/>
+										<xs:element name="UcuncuFireMiktar" type="xs:decimal" minOccurs="0"/>
+										<xs:element name="UcuncuBirim" type="olcuBirimiType"  minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Tip Tanimlamalari-->
+	<xs:simpleType name="olcuBirimiType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Adet"/>
+			<xs:enumeration value="Gram"/>
+			<xs:enumeration value="Kg"/>
+			<xs:enumeration value="Litre"/>
+			<xs:enumeration value="Metre"/>
+			<xs:enumeration value="Çift"/>
+			<xs:enumeration value="Baş"/>
+			<xs:enumeration value="Groston"/>
+			<xs:enumeration value="M2"/>
+			<xs:enumeration value="M3"/>
+			<xs:enumeration value="KWH"/>
+			<xs:enumeration value="TJ"/>
+			<xs:enumeration value="Karat"/>
+			<xs:enumeration value="CE/EL"/>
+			<xs:enumeration value="YüzAdet"/>
+			<xs:enumeration value="BinAdet"/>
+			<xs:enumeration value="BinLt"/>
+			<xs:enumeration value="BinM3"/>
+			<xs:enumeration value="CT/I"/>
+			<xs:enumeration value="Litrealk"/>
+			<xs:enumeration value="1000kWs"/>
+			<xs:enumeration value="giF/S"/>
+			<xs:enumeration value="hücreadet"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="serbestBolgeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="İstanbul Endüstri ve Ticaret Serbest Bölgesi"/>
+			<xs:enumeration value="Ege Serbest Bölgesi"/>
+			<xs:enumeration value="Mersin Serbest Bölgesi"/>
+			<xs:enumeration value="İstanbul Trakya Serbest Bölgesi"/>
+			<xs:enumeration value="Trabzon Serbest Bölgesi"/>
+			<xs:enumeration value="Mardin Serbest Bölgesi"/>
+			<xs:enumeration value="Doğu Anadolu Serbest Bölgesi"/>
+			<xs:enumeration value="İzmir Serbest Bölgesi"/>
+			<xs:enumeration value="Adana-Yumurtalık Serbest Bölgesi"/>
+			<xs:enumeration value="Rize Serbest Bölgesi"/>
+			<xs:enumeration value="Samsun Serbest Bölgesi"/>
+			<xs:enumeration value="Kayseri Serbest Bölgesi"/>
+			<xs:enumeration value="Avrupa Serbest Bölgesi"/>
+			<xs:enumeration value="Gaziantep Serbest Bölgesi"/>
+			<xs:enumeration value="Bursa Serbest Bölgesi"/>
+			<xs:enumeration value="Tübitak-Marmara Araştırma Merkezi Teknoloji Serbest Bölgesi"/>
+			<xs:enumeration value="Kocaeli Serbest Bölgesi"/>
+			<xs:enumeration value="Denizli Serbest Bölgesi"/>
+			<xs:enumeration value="Antalya Serbest Bölgesi"/>
+			<xs:enumeration value="İstanbul İhtisas Serbest Bölgesi"/>
+			<xs:enumeration value="Test Serbest Bölgesi"/>	
+			<xs:enumeration value="Batı Anadolu Serbest Bölgesi"/>			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ulkeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Açıkça Belirtilmemiş Ülkeler Ve Bölgeler"/>
+			<xs:enumeration value="Adana-Yumurtalık Serbest Bölgesi"/>
+			<xs:enumeration value="Afganistan"/>
+			<xs:enumeration value="Almanya"/>
+			<xs:enumeration value="Amerika Birleşik Devletleri"/>
+			<xs:enumeration value="Amerika Birleşik Devletleri Küçük Dış Adaları"/>
+			<xs:enumeration value="Amerika Birleşik Devletleri Virjin Adaları"/>
+			<xs:enumeration value="Amerikan Okyan."/>
+			<xs:enumeration value="Amerikan Samoası"/>
+			<xs:enumeration value="Andorra"/>
+			<xs:enumeration value="Angola"/>
+			<xs:enumeration value="Anguilla"/>
+			<xs:enumeration value="Antalya Serbest Bölgesi"/>
+			<xs:enumeration value="Antartika"/>
+			<xs:enumeration value="Antigua ve Barbuda"/>
+			<xs:enumeration value="Arjantin"/>
+			<xs:enumeration value="Arnavutluk"/>
+			<xs:enumeration value="Aruba"/>
+			<xs:enumeration value="Avrupa Serbest Bölgesi"/>
+			<xs:enumeration value="Avustralya"/>
+			<xs:enumeration value="Avustralya Okyan."/>
+			<xs:enumeration value="Avusturya"/>
+			<xs:enumeration value="Azerbaycan"/>
+			<xs:enumeration value="Bahamalar"/>
+			<xs:enumeration value="Bahreyn"/>
+			<xs:enumeration value="Bangladeş"/>
+			<xs:enumeration value="Barbados"/>
+			<xs:enumeration value="Batı Anadolu Serbest Bölgesi"/>
+			<xs:enumeration value="Belçika"/>
+			<xs:enumeration value="Belize"/>
+			<xs:enumeration value="Benin"/>
+			<xs:enumeration value="Bermuda"/>
+			<xs:enumeration value="Beyaz Rusya"/>
+			<xs:enumeration value="Birleşik Arap Emirlikleri"/>
+			<xs:enumeration value="Birleşik Krallık"/>
+			<xs:enumeration value="Bolivya"/>
+			<xs:enumeration value="Bonaire, Sint Eustatius ve Saba"/>
+			<xs:enumeration value="Bosna Hersek"/>
+			<xs:enumeration value="Botsvana"/>
+			<xs:enumeration value="Bouvet Adası"/>
+			<xs:enumeration value="Brezilya"/>
+			<xs:enumeration value="Britanya Hint Okyanus Toprakları"/>
+			<xs:enumeration value="Britanya Virjin Adaları"/>
+			<xs:enumeration value="Bruney"/>
+			<xs:enumeration value="Bulgaristan"/>
+			<xs:enumeration value="Burkina Faso"/>
+			<xs:enumeration value="Burma"/>
+			<xs:enumeration value="Bursa Serbest Bölgesi"/>
+			<xs:enumeration value="Burundi"/>
+			<xs:enumeration value="Butan"/>
+			<xs:enumeration value="Cabo Verde"/>
+			<xs:enumeration value="Cayman Adaları"/>
+			<xs:enumeration value="Cebelitarık"/>
+			<xs:enumeration value="Ceuta"/>
+			<xs:enumeration value="Ceuta ve Mellila"/>
+			<xs:enumeration value="Cezayir"/>
+			<xs:enumeration value="Christmas Adası"/>
+			<xs:enumeration value="Cibuti"/>
+			<xs:enumeration value="Cocos Adaları"/>
+			<xs:enumeration value="Cook Adaları"/>
+			<xs:enumeration value="Curaçao"/>
+			<xs:enumeration value="Çad"/>
+			<xs:enumeration value="Çekya"/>
+			<xs:enumeration value="Çin"/>
+			<xs:enumeration value="Danimarka"/>
+			<xs:enumeration value="Denizli Serbest Bölgesi"/>
+			<xs:enumeration value="Doğu Timor"/>
+			<xs:enumeration value="Dominik Cumhuriyeti"/>
+			<xs:enumeration value="Dominika"/>
+			<xs:enumeration value="Ege Serbest Bölgesi"/>
+			<xs:enumeration value="Ekvator"/>
+			<xs:enumeration value="Ekvator Ginesi"/>
+			<xs:enumeration value="El Salvador"/>
+			<xs:enumeration value="Endonezya"/>
+			<xs:enumeration value="Eritre"/>
+			<xs:enumeration value="Ermenistan"/>
+			<xs:enumeration value="Erzurum Serbest Bölgesi"/>
+			<xs:enumeration value="Estonya"/>
+			<xs:enumeration value="Esvatini"/>
+			<xs:enumeration value="Etiyopya"/>
+			<xs:enumeration value="Falkland Adaları (Malvinas)"/>
+			<xs:enumeration value="Faroe Adaları"/>
+			<xs:enumeration value="Fas"/>
+			<xs:enumeration value="Fiji"/>
+			<xs:enumeration value="Filipinler"/>
+			<xs:enumeration value="Filistin"/>
+			<xs:enumeration value="Finlandiya"/>
+			<xs:enumeration value="Fransa"/>
+			<xs:enumeration value="Fransız Guyanası"/>
+			<xs:enumeration value="Fransız Güney Toprakları"/>
+			<xs:enumeration value="Fransız Polinezyası"/>
+			<xs:enumeration value="Gabon"/>
+			<xs:enumeration value="Gambiya"/>
+			<xs:enumeration value="Gana"/>
+			<xs:enumeration value="Gaziantep Serbest Bölgesi"/>
+			<xs:enumeration value="Gine"/>
+			<xs:enumeration value="Gine-Bissau"/>
+			<xs:enumeration value="Grenada"/>
+			<xs:enumeration value="Grönland"/>
+			<xs:enumeration value="Guadeloupe"/>
+			<xs:enumeration value="Guam"/>
+			<xs:enumeration value="Guatemala"/>
+			<xs:enumeration value="Guyana"/>
+			<xs:enumeration value="Gümrüksüz Mağazalar (FreeShops)"/>
+			<xs:enumeration value="Güney Afrika Cumhuriyeti"/>
+			<xs:enumeration value="Güney Georgia ve Güney Sandwich Adaları"/>
+			<xs:enumeration value="Güney Kıbrıs"/>
+			<xs:enumeration value="Güney Kore"/>
+			<xs:enumeration value="Güney Sudan"/>
+			<xs:enumeration value="Gürcistan"/>
+			<xs:enumeration value="Haiti"/>
+			<xs:enumeration value="Heard Adası ve McDonald Adaları"/>
+			<xs:enumeration value="Hırvatistan"/>
+			<xs:enumeration value="Hindistan"/>
+			<xs:enumeration value="Hollanda"/>
+			<xs:enumeration value="Hollanda Antilleri"/>
+			<xs:enumeration value="Honduras"/>
+			<xs:enumeration value="Hong Kong"/>
+			<xs:enumeration value="Irak"/>
+			<xs:enumeration value="İran"/>
+			<xs:enumeration value="İrlanda"/>
+			<xs:enumeration value="İspanya"/>
+			<xs:enumeration value="İsrail"/>
+			<xs:enumeration value="İstanbul Endüstri ve Ticaret Serbest Bölgesi"/>
+			<xs:enumeration value="İstanbul İhtisas Serbest Bölgesi"/>
+			<xs:enumeration value="İstanbul Trakya Serbest Bölgesi"/>
+			<xs:enumeration value="İsveç"/>
+			<xs:enumeration value="İsviçre"/>
+			<xs:enumeration value="İtalya"/>
+			<xs:enumeration value="İzlanda"/>
+			<xs:enumeration value="İzmir Serbest Bölgesi"/>
+			<xs:enumeration value="Jamaika"/>
+			<xs:enumeration value="Japonya"/>
+			<xs:enumeration value="Kamboçya"/>
+			<xs:enumeration value="Kamerun"/>
+			<xs:enumeration value="Kanada"/>
+			<xs:enumeration value="Karadağ"/>
+			<xs:enumeration value="Katar"/>
+			<xs:enumeration value="Kayseri Serbest Bölgesi"/>
+			<xs:enumeration value="Kazakistan"/>
+			<xs:enumeration value="Kenya"/>
+			<xs:enumeration value="Kırgızistan"/>
+			<xs:enumeration value="Kiribati"/>
+			<xs:enumeration value="Kocaeli Serbest Bölgesi"/>
+			<xs:enumeration value="Kolombiya"/>
+			<xs:enumeration value="Komorlar"/>
+			<xs:enumeration value="Kongo"/>
+			<xs:enumeration value="Kongo Demokratik Cumhuriyeti"/>
+			<xs:enumeration value="Kosova"/>
+			<xs:enumeration value="Kosta Rika"/>
+			<xs:enumeration value="Kotdivuar"/>
+			<xs:enumeration value="Kutup Bölgeleri"/>
+			<xs:enumeration value="Kuveyt"/>
+			<xs:enumeration value="Kuzey Kıbrıs Türk Cumhuriyeti"/>
+			<xs:enumeration value="Kuzey Kore"/>
+			<xs:enumeration value="Kuzey Makedonya"/>
+			<xs:enumeration value="Kuzey Mariana Adaları"/>
+			<xs:enumeration value="Küba"/>
+			<xs:enumeration value="Laos"/>
+			<xs:enumeration value="Lesotho"/>
+			<xs:enumeration value="Letonya"/>
+			<xs:enumeration value="Liberya"/>
+			<xs:enumeration value="Libya"/>
+			<xs:enumeration value="Lihtenştayn"/>
+			<xs:enumeration value="Litvanya"/>
+			<xs:enumeration value="Lübnan"/>
+			<xs:enumeration value="Lüksemburg"/>
+			<xs:enumeration value="Macaristan"/>
+			<xs:enumeration value="Madagaskar"/>
+			<xs:enumeration value="Mağaza ve depolama alanları"/>
+			<xs:enumeration value="Makao"/>
+			<xs:enumeration value="Malavi"/>
+			<xs:enumeration value="Maldivler"/>
+			<xs:enumeration value="Malezya"/>
+			<xs:enumeration value="Mali"/>
+			<xs:enumeration value="Malta"/>
+			<xs:enumeration value="Mardin Serbest Bölgesi"/>
+			<xs:enumeration value="Marşal Adaları"/>
+			<xs:enumeration value="Martinique"/>
+			<xs:enumeration value="Mauritius"/>
+			<xs:enumeration value="Mayotte"/>
+			<xs:enumeration value="Meksika"/>
+			<xs:enumeration value="Mellila"/>
+			<xs:enumeration value="Mersin Serbest Bölgesi"/>
+			<xs:enumeration value="Mısır"/>
+			<xs:enumeration value="Mikronezya"/>
+			<xs:enumeration value="Moğolistan"/>
+			<xs:enumeration value="Moldova"/>
+			<xs:enumeration value="Monako"/>
+			<xs:enumeration value="Montserrat"/>
+			<xs:enumeration value="Moritanya"/>
+			<xs:enumeration value="Mozambik"/>
+			<xs:enumeration value="Namibya"/>
+			<xs:enumeration value="Nauru"/>
+			<xs:enumeration value="Nepal"/>
+			<xs:enumeration value="Nijer"/>
+			<xs:enumeration value="Nijerya"/>
+			<xs:enumeration value="Nikaragua"/>
+			<xs:enumeration value="Niue"/>
+			<xs:enumeration value="Norfolk Adası"/>
+			<xs:enumeration value="Norveç"/>
+			<xs:enumeration value="Orta Afrika Cumhuriyeti"/>
+			<xs:enumeration value="Özbekistan"/>
+			<xs:enumeration value="Pakistan"/>
+			<xs:enumeration value="Palau"/>
+			<xs:enumeration value="Panama"/>
+			<xs:enumeration value="Papua Yeni Gine"/>
+			<xs:enumeration value="Paraguay"/>
+			<xs:enumeration value="Peru"/>
+			<xs:enumeration value="Pitcairn"/>
+			<xs:enumeration value="Polonya"/>
+			<xs:enumeration value="Portekiz"/>
+			<xs:enumeration value="Reunion"/>
+			<xs:enumeration value="Rize Serbest Bölgesi"/>
+			<xs:enumeration value="Romanya"/>
+			<xs:enumeration value="Ruanda"/>
+			<xs:enumeration value="Rusya Federasyonu"/>
+			<xs:enumeration value="Saint Barthelemy"/>
+			<xs:enumeration value="Saint Helena"/>
+			<xs:enumeration value="Saint Kitts ve Nevis"/>
+			<xs:enumeration value="Saint Lucia"/>
+			<xs:enumeration value="Saint Pierre ve Miquelon"/>
+			<xs:enumeration value="Saint Vincent ve Grenadinler"/>
+			<xs:enumeration value="Samoa"/>
+			<xs:enumeration value="Samsun Serbest Bölgesi"/>
+			<xs:enumeration value="San Marino"/>
+			<xs:enumeration value="Sao Tome ve Prinsipe"/>
+			<xs:enumeration value="Senegal"/>
+			<xs:enumeration value="Seyşeller"/>
+			<xs:enumeration value="Sırbistan"/>
+			<xs:enumeration value="Sırbistan ve Karadağ"/>
+			<xs:enumeration value="Sierra Leone"/>
+			<xs:enumeration value="Singapur"/>
+			<xs:enumeration value="Slovakya"/>
+			<xs:enumeration value="Slovenya"/>
+			<xs:enumeration value="Solomon Ada."/>
+			<xs:enumeration value="Somali"/>
+			<xs:enumeration value="Sri Lanka"/>
+			<xs:enumeration value="Sudan"/>
+			<xs:enumeration value="Surinam"/>
+			<xs:enumeration value="Suriye"/>
+			<xs:enumeration value="Suudi Arabistan"/>
+			<xs:enumeration value="Şili"/>
+			<xs:enumeration value="Tacikistan"/>
+			<xs:enumeration value="Tanzanya"/>
+			<xs:enumeration value="Tayland"/>
+			<xs:enumeration value="Tayvan"/>
+			<xs:enumeration value="Test Serbest Bölgesi"/>
+			<xs:enumeration value="Ticari Ve Askeri Nedenlerden Ötürü Belirtilmeyen Ülkeler Ve Bölgeler"/>
+			<xs:enumeration value="Togo"/>
+			<xs:enumeration value="Tokelau"/>
+			<xs:enumeration value="Tonga"/>
+			<xs:enumeration value="Trabzon Serbest Bölgesi"/>
+			<xs:enumeration value="Trinidad ve Tobago"/>
+			<xs:enumeration value="Tunus"/>
+			<xs:enumeration value="Turks ve Caicos Adaları"/>
+			<xs:enumeration value="Tuvalu"/>
+			<xs:enumeration value="Tübitak-Marmara Araştırma Merkezi Teknoloji Serbest Bölgesi"/>
+			<xs:enumeration value="Türkiye"/>
+			<xs:enumeration value="Türkmenistan"/>
+			<xs:enumeration value="Uganda"/>
+			<xs:enumeration value="Ukrayna"/>
+			<xs:enumeration value="Umman"/>
+			<xs:enumeration value="Uruguay"/>
+			<xs:enumeration value="Üçüncü ülkelerle ticaret kapsamında mağaza ve depolama alanları"/>
+			<xs:enumeration value="Ürdün"/>
+			<xs:enumeration value="Vallis ve Fortuna"/>
+			<xs:enumeration value="Vanuatu"/>
+			<xs:enumeration value="Vatikan"/>
+			<xs:enumeration value="Venezuela"/>
+			<xs:enumeration value="Vietnam"/>
+			<xs:enumeration value="Yemen"/>
+			<xs:enumeration value="Yeni Kaledonya"/>
+			<xs:enumeration value="Yeni Zelanda"/>
+			<xs:enumeration value="Yeni Zelenda Oky."/>
+			<xs:enumeration value="Yunanistan"/>
+			<xs:enumeration value="Zambiya"/>
+			<xs:enumeration value="Zimbabve"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="formTipiType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UBF"/>
+			<xs:enumeration value="SBIF"/>
+			<xs:enumeration value="SIG"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CSDateType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0-9]{4}[0-9]{2}[0-9]{2}"/>
+			<!--xs:pattern value="YYYY-MM-DD"/-->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ruhsatKonulariType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ALIM SATIM"/>
+			<xs:enumeration value="ÜRETİM"/>
+			<xs:enumeration value="İŞYERİ KİRALAMA"/>
+			<xs:enumeration value="DEPO İŞLETMECİLİĞİ"/>
+			<xs:enumeration value="MONTAJ DEMONTAJ"/>
+			<xs:enumeration value="BAKIM ONARIM"/>
+			<xs:enumeration value="B.K.İ."/>
+			<xs:enumeration value="İŞLETİCİ"/>
+			<xs:enumeration value="BANKACILIK"/>
+			<xs:enumeration value="SİGORTACILIK"/>
+			<xs:enumeration value="FİNANSAL KİRALAMA"/>
+			<xs:enumeration value="ARGE"/>
+			<xs:enumeration value="LOJİSTİK"/>
+			<xs:enumeration value="ATIK YÖNETİM SİSTEMİ"/>
+			<xs:enumeration value="YEMEK ÜRETİMİ"/>
+		    <xs:enumeration value="KUMANYACILIK"/>
+			<xs:enumeration value="KIYMETLİ EŞYA LOJİSTİĞİ"/>																					
+			<xs:enumeration value="BORSA KASA HİZMETİ"/>
+			<xs:enumeration value="DİĞER"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
